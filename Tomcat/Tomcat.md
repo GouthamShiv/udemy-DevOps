@@ -25,8 +25,7 @@
 * Config change to enable UI access
     * > export tomcat_path=/opt/tomcat
     * > find $tomcat_path -name context.xml
-    * comment the section in all the `context.xml` files within the `webapp` folder
-    > <Valve className .../>
+    * comment the section `<Valve className .../>` in all the `context.xml` files within the `webapp` folder
 * restart `tomcat`
 
 ---
