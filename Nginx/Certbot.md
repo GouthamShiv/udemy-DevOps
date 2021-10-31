@@ -11,7 +11,7 @@
 
 ### using `certbot` to get certificate
 ---
-> sudo certbot --nginx -d <<domain-name>>
+> sudo certbot --nginx -d $domain_name
 
 ---
 ---
