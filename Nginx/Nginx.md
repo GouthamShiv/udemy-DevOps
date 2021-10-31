@@ -3,12 +3,14 @@
 
 
 ### Installing `NGINX`
+---
 > sudo apt install nginx
 
 ---
 ---
 
 ### `NGINX` config for jenkins
+---
 ```config
     upstream jenkins {
     keepalive 4; # keepalive connections
@@ -62,6 +64,31 @@
             proxy_buffering            off;
             proxy_request_buffering    off; # Required for HTTP CLI commands
             proxy_set_header Connection ""; # Clear for keepalive
+        }
+
+    }
+```
+
+---
+---
+
+### `NGINX` config for `tomcat`
+---
+```config
+    upstream tomcat {
+        keepalive 2;
+        server 127.0.0.1:8080;
+    }
+
+    server {
+    server_name     <<hostname>>;
+    root            $tomcat_path/webapp/manager;
+
+        location / {
+                proxy_set_header X-Forwarded-Host <<hostname>>;
+                proxy_set_header X-Forwarded-Server <<hostname>>;
+                # proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_pass http://tomcat;
         }
 
     }
